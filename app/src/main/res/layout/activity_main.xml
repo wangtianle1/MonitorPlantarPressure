@@ -130,7 +130,65 @@
                     android:layout_marginLeft="5dp"
                     android:backgroundTint="#71bfda"
                     android:layout_height="150dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:layout_marginLeft="5dp"
+                app:cardCornerRadius="15dp"
+                android:backgroundTint="#e8af8e"
 
+                android:layout_width="80dp"
+                android:layout_height="60dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <ImageView
+                        android:layout_marginTop="15dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:background="@drawable/power"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="控糖记录"
+                        android:textColor="#fff"
+                        android:textSize="15dp"
+                        android:gravity="center_horizontal"/>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+ <androidx.cardview.widget.CardView
+                android:layout_marginLeft="5dp"
+                app:cardCornerRadius="15dp"
+                android:backgroundTint="#e8af8e"
+                android:layout_marginTop="5dp"
+                android:layout_width="80dp"
+                android:layout_height="75dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="控糖记录"
+                        android:textColor="#fff"
+                        android:textSize="15dp"
+                        android:gravity="center_horizontal"/>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
