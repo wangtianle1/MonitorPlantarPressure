@@ -1,198 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="#e9b091">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <FrameLayout
-        android:background="@drawable/rounded_background"
+    <RelativeLayout
+        android:id="@+id/index_rl_contain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp">
-        <LinearLayout
+        android:layout_height="match_parent">
+
+        <com.example.monitorplantarpressure.MyViewPager
+            android:id="@+id/index_vp_fragment_list_top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+            android:layout_alignParentTop="true">
 
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:text="压力实时监测"
-                        android:textColor="#7c7c7c"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+        </com.example.monitorplantarpressure.MyViewPager>
 
+        <FrameLayout
+            android:id="@+id/index_fl_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#fff">
 
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/lineChart"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="20dp" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_gravity="center"
-                        android:text="运动时长"
-                        android:textColor="#7c7c7c"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/cv_gotime"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        app:cardCornerRadius="20dp"
-                        android:backgroundTint="#72bfda"
-                        >
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:background="@drawable/power"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="10dp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:id="@+id/tv_countHour"
-                                android:layout_marginTop="18dp"
-                                android:layout_height="30dp"
-                                android:textColor="#fff"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center"
-                                android:text="0 小时"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:id="@+id/tv_countMin"
-                                android:layout_marginTop="10dp"
-                                android:layout_height="30dp"
-                                android:textColor="#fff"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center"
-                                android:text="0 分钟"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:id="@+id/tv_countSec"
-                                android:layout_marginTop="10dp"
-                                android:layout_height="30dp"
-                                android:textColor="#fff"
-                                android:layout_gravity="center_horizontal"
-                                android:gravity="center"
-                                android:text="1 秒"/>
-
-
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="80dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:backgroundTint="#6990ef"
-                    android:layout_height="150dp"/>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="80dp"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginLeft="5dp"
-                    android:backgroundTint="#71bfda"
-                    android:layout_height="150dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <androidx.cardview.widget.CardView
-                android:layout_marginLeft="5dp"
-                app:cardCornerRadius="15dp"
-                android:backgroundTint="#e8af8e"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:orientation="horizontal">
+<!--                android:background="@mipmap/bottom_bar_background"-->
 
-                android:layout_width="80dp"
-                android:layout_height="60dp">
+                <!-- 首页 -->
+
                 <LinearLayout
+                    android:id="@+id/index_bottom_bar_home"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <ImageView
-                        android:layout_marginTop="15dp"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:background="@drawable/power"
-                        android:layout_gravity="center"/>
+                        android:id="@+id/index_bottom_bar_home_image"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/home" />
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="控糖记录"
-                        android:textColor="#fff"
-                        android:textSize="15dp"
-                        android:gravity="center_horizontal"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_home"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
                 </LinearLayout>
 
+                <!-- 动态 -->
 
-            </androidx.cardview.widget.CardView>
- <androidx.cardview.widget.CardView
-                android:layout_marginLeft="5dp"
-                app:cardCornerRadius="15dp"
-                android:backgroundTint="#e8af8e"
-                android:layout_marginTop="5dp"
-                android:layout_width="80dp"
-                android:layout_height="75dp">
                 <LinearLayout
+                    android:id="@+id/index_bottom_bar_dynamic_state"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/index_bottom_bar_dynamic_state_image"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="top|center"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/pic" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="控糖记录"
-                        android:textColor="#fff"
-                        android:textSize="15dp"
-                        android:gravity="center_horizontal"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_dynamic_state"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
+                <!-- 留白 -->
 
-            </androidx.cardview.widget.CardView>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-        </LinearLayout>
+                </FrameLayout>
+
+                <!-- 积分 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_integral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/index_bottom_bar_integral_image"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/play" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_integral"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <!-- 我的 -->
+
+                <LinearLayout
+                    android:id="@+id/index_bottom_bar_me"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/index_bottom_bar_me_image"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/user" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/index_bottom_bar_me"
+                        android:textColor="#000"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
 
-    </FrameLayout>
+        </FrameLayout>
 
+        <ImageView
+            android:id="@+id/index_bottom_bar_scan"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="0dp"
+            android:src="@mipmap/addition_fill" />
 
-</FrameLayout>
+    </RelativeLayout>
+
+</LinearLayout>
