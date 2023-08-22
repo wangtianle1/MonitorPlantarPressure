@@ -44,7 +44,9 @@
                     android:layout_height="50dp"
                     android:textSize="25dp"
                     android:layout_marginLeft="15dp"
-                    android:text="王女士"
+                    android:text="小王同学"
+                    android:id="@+id/tv_name"
+                    android:onClick="changeName"
                     android:gravity="center"
                     android:textColor="#fff"/>
 

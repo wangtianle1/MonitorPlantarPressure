@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         index_bottom_bar_me.setOnClickListener(new TabOnClickListener(3));
         index_bottom_bar_scan.setOnClickListener(new TabOnClickListener(4));
     }
-
     private void initIndexFragmentAdapter() {
         mFragmentIndexAdapter = new FragmentIndexAdapter(this.getSupportFragmentManager(), mFragments);
         index_vp_fragment_list_top.setAdapter(mFragmentIndexAdapter);
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         mFragments = new ArrayList<Fragment>();
         mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
-        mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_dynamic_state)));
+        mFragments.add(ChartFragment.newInstance(getResources().getString(R.string.index_bottom_bar_dynamic_state)));
         mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
         mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
         initIndexFragmentAdapter();
@@ -85,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
         index_bottom_bar_scan = (ImageView) findViewById(R.id.index_bottom_bar_scan);
         index_rl_contain = (RelativeLayout) findViewById(R.id.index_rl_contain);
     }
+
+
 
     /**
      * Bottom_Bar的点击事件
