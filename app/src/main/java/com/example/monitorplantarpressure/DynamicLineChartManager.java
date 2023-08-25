@@ -29,31 +29,31 @@ public class DynamicLineChartManager {
     private List<ILineDataSet> lineDataSets = new ArrayList<>();
     private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");//设置日期格式
     private List<String> timeList = new ArrayList<>(); //存储x轴的时间
-
+    private int xLabelCount =10;
     //一条曲线
     public DynamicLineChartManager(LineChart mLineChart, String name, int color) {
         this.lineChart = mLineChart;
         leftAxis = lineChart.getAxisLeft();
         rightAxis = lineChart.getAxisRight();
         xAxis = lineChart.getXAxis();
-        initLineChart();
+        initLineChart(xLabelCount);
         initLineDataSet(name, color);
     }
 
     //多条曲线
-    public DynamicLineChartManager(LineChart mLineChart, List<String> names, List<Integer> colors) {
+    public DynamicLineChartManager(LineChart mLineChart, List<String> names, List<Integer> colors,int LabelCount) {
         this.lineChart = mLineChart;
         leftAxis = lineChart.getAxisLeft();
         rightAxis = lineChart.getAxisRight();
         xAxis = lineChart.getXAxis();
-        initLineChart();
+        initLineChart(LabelCount);
         initLineDataSet(names, colors);
     }
 
     /**
      * 初始化LineChar
      */
-    private void initLineChart() {
+    private void initLineChart(int xLabelCount) {
 
         lineChart.setDrawGridBackground(false);
         //显示边界
@@ -71,7 +71,7 @@ public class DynamicLineChartManager {
         //X轴设置显示位置在底部
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
-        xAxis.setLabelCount(10);
+        xAxis.setLabelCount(xLabelCount);
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override

@@ -46,7 +46,7 @@ public class ChartFragment extends Fragment {
         colour.add(Color.BLUE);
 
         dynamicLineChartManager1 = new DynamicLineChartManager(lineCharta, names.get(0), colour.get(0));
-        dynamicLineChartManager2 = new DynamicLineChartManager(lineChartb, names, colour);
+        dynamicLineChartManager2 = new DynamicLineChartManager(lineChartb, names, colour,10);
 
         dynamicLineChartManager1.setYAxis(100, 0, 10);
         dynamicLineChartManager2.setYAxis(100, 0, 10);

@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
         mFragments.add(ChartFragment.newInstance(getResources().getString(R.string.index_bottom_bar_dynamic_state)));
         mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
-        mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
+        mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
         initIndexFragmentAdapter();
     }
 

@@ -12,9 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,7 +32,7 @@ public class MainFragment extends Fragment {
     private Handler handler;
     private static final int MSG_UPDATE_CHART = 1;
     private Random random = new Random();
-
+    SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
 
     public static MainFragment newInstance(String sectionNumber) {
         MainFragment fragment = new MainFragment();
@@ -45,12 +50,20 @@ public class MainFragment extends Fragment {
         lineChart = view.findViewById(R.id.lineChart);
         dataSet = new LineDataSet(new ArrayList<>(), "Real-time Data");
         dataSet.setDrawCircles(false);
+        lineChart.setDrawGridBackground(true); //是否展示网格线
+        lineChart.setDrawBorders(true); //是否显示边界
+        lineChart.setDragEnabled(true); //是否可以拖动
+        lineChart.setScaleEnabled(true); // 是否可以缩放
+        lineChart.setTouchEnabled(true); //是否有触摸事件
+        dataSet.setValueTextSize(8f);
+        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);//设置圆滑曲线
+        lineChart.animateX(1500);
+        lineChart.animateY(2500);
+        lineChart.setVisibleYRangeMaximum(30, YAxis.AxisDependency.LEFT);// 当前统计图表中最多在Y轴坐标线上显示的总量
+        lineChart.setVisibleYRangeMaximum(30, YAxis.AxisDependency.RIGHT);// 当前统计图表中最多在Y轴坐标线上显示的总
         dataSet.setDrawValues(false);
         lineData = new LineData(dataSet);
         lineChart.setData(lineData);
-
-        // 配置 LineChart 样式和交互等
-        // ...
 
         // 初始化 Handler 用于定时更新数据
         handler = new Handler(Looper.getMainLooper()) {
@@ -59,7 +72,7 @@ public class MainFragment extends Fragment {
                 if (msg.what == MSG_UPDATE_CHART) {
                     float newValue = generateRandomValue(); // 生成随机数据
                     updateChart(newValue); // 更新图表
-                    sendEmptyMessageDelayed(MSG_UPDATE_CHART, 200); // 1秒后再次发送消息
+                    sendEmptyMessageDelayed(MSG_UPDATE_CHART, 1000); // 1秒后再次发送消息
                 }
             }
         };
@@ -70,7 +83,7 @@ public class MainFragment extends Fragment {
     }
     // 随机生成一个假数据值
     private float generateRandomValue() {
-        return random.nextFloat() * 100;
+        return random.nextFloat() +10;
     }
 
     // 更新图表数据

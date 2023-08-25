@@ -116,7 +116,7 @@
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
-                        android:layout_width="200dp"
+                        android:layout_width="230dp"
                         android:layout_height="200dp"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="20dp" />
@@ -199,6 +199,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_warming"
                     android:layout_width="80dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginLeft="15dp"
@@ -230,6 +231,7 @@
 
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_booking"
                     android:layout_width="80dp"
                     app:cardCornerRadius="15dp"
                     android:layout_marginLeft="5dp"
