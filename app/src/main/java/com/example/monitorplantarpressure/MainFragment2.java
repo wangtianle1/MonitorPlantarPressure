@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,13 +35,17 @@ public class MainFragment2 extends Fragment {
     private List<String> names = new ArrayList<>(); //折线名字集合
     private List<Integer> colour = new ArrayList<>();//折线颜色集合
     private int CollectTime = 1500;
-    private CardView cv_warming,cv_booking,cv_gotime;
-    private TextView tv_onTimeValue,tv_countHour,tv_countMin,tv_countSec;
-    private int[] sportsMode = {20,30};
-    private int[] sprotsOn = {20,30},sprotOff = {60,90};
+    private CardView cv_warming, cv_booking, cv_gotime;
+    private TextView tv_onTimeValue, tv_countHour, tv_countMin, tv_countSec;
+    private int[] sportsMode = {20, 30};
+    private int[] sprotsOff = {20, 30}, sprotsOn = {60, 90};
     private int sprot = 0;
     private CharSequence[] charSequences = {"休闲模式", "运动模式"};
     private int item = 0;
+    private LinearLayout ll_gotime;
+    private boolean isSprot = true;
+    public int sportTime ;
+
     public static MainFragment2 newInstance(String sectionNumber) {
         MainFragment2 fragment = new MainFragment2();
         Bundle args = new Bundle();
@@ -70,6 +75,10 @@ public class MainFragment2 extends Fragment {
         dynamicLineChartManager = new DynamicLineChartManager(lineChart, names, colour, 3);
         dynamicLineChartManager.setDescription("");
         dynamicLineChartManager.setYAxis(100, 0, 10);
+        sportTime = SPUtils.getInt("ST",1,getActivity());
+        tv_countHour.setText(sportTime / 3600 + " 小时");
+        tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
+        tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
         lineChart.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -94,8 +103,7 @@ public class MainFragment2 extends Fragment {
                                         //操作
                                         if (isInteger(content)) {
                                             CollectTime = Integer.valueOf(content);
-                                        }
-                                        else {
+                                        } else {
                                             Toast.makeText(getActivity(), "请输入整数", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -112,6 +120,7 @@ public class MainFragment2 extends Fragment {
         });
         //死循环添加数据
         new Thread(new Runnable() {
+
             @Override
             public void run() {
                 while (true) {
@@ -120,12 +129,25 @@ public class MainFragment2 extends Fragment {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    SPUtils.getInt("ST",1,getActivity());
+                    if (isSprot){
+                        SPUtils.putInt("ST",sportTime,getActivity());
+                    }else if(isSprot == false){
+                        sportTime++;
+
+                    }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+//                            if (sportTime>=3600){
+                                tv_countHour.setText(sportTime / 3600 + " 小时");
+                                tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
+                                tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
+//                            }
+//                            tv_countSec.setText(sportTime/);
                             list.add((int) (Math.random() * sportsMode[0]) + 10);
                             list.add((int) (Math.random() * sportsMode[1]) + 10);
-                            list.add((list.get(0)+list.get(1))/2);
+                            list.add((list.get(0) + list.get(1)) / 2);
 //                            list.add((int) (Math.random() * 100));
                             dynamicLineChartManager.addEntry(list);
                             tv_onTimeValue.setText(list.get(2).toString());
@@ -154,6 +176,7 @@ public class MainFragment2 extends Fragment {
             }
         });
         cv_gotime = view.findViewById(R.id.cv_gotime);
+        ll_gotime = view.findViewById(R.id.ll_gotime);
         cv_gotime.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -171,12 +194,26 @@ public class MainFragment2 extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(getActivity(), "你选择了" + charSequences[item], Toast.LENGTH_SHORT).show();
-                                if (charSequences[item].equals(charSequences[0])){
-                                        sportsMode[0] = sprotOff[0];
-                                        sportsMode[1] = sprotOff[1];
-                                }else if (charSequences[item].equals(charSequences[1])) {
+                                if (charSequences[item].equals(charSequences[0])) {
+                                    sportsMode[0] = sprotsOff[0];
+                                    isSprot = true;
+                                    sportsMode[1] = sprotsOff[1];
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {//休闲模式
+                                            ll_gotime.setBackgroundColor(Color.rgb(114, 191, 218));
+                                        }
+                                    });
+                                } else if (charSequences[item].equals(charSequences[1])) {//运动模式
                                     sportsMode[0] = sprotsOn[0];
+                                    isSprot = false;
                                     sportsMode[1] = sprotsOn[1];
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ll_gotime.setBackgroundColor(Color.rgb(195, 84, 79));
+                                        }
+                                    });
                                 }
                                 dialog.dismiss();
                             }
@@ -193,7 +230,6 @@ public class MainFragment2 extends Fragment {
             }
         });
     }
-
     private static boolean isInteger(String value) {
         try {
             Integer.parseInt(value);
