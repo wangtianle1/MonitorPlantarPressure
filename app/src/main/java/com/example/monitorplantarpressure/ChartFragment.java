@@ -18,10 +18,16 @@ import java.util.List;
 public class ChartFragment extends Fragment {
     private DynamicLineChartManager dynamicLineChartManager1;
     private DynamicLineChartManager dynamicLineChartManager2;
-    private List<Integer> list = new ArrayList<>(); //数据集合
-    private List<String> names = new ArrayList<>(); //折线名字集合
-    private List<Integer> colour = new ArrayList<>();//折线颜色集合
+    private List<Integer> lista = new ArrayList<>(); //数据集合
+    private List<Integer> listb = new ArrayList<>(); //数据集合
+    private List<String> namesa = new ArrayList<>(); //折线名字集合
+    private List<String> namesb = new ArrayList<>(); //折线名字集合
+    private List<Integer> coloura = new ArrayList<>();//折线颜色集合
+    private List<Integer> colourb = new ArrayList<>();//折线颜色集合
+    private int[] sprotsOff = {25};
+    private int[] sprotsOn = {75};
     public static final String SECTION_STRING = "chart";
+    private DynamicLineChartManager dynamicLineChartManagera,dynamicLineChartManagerb;
     public static ChartFragment newInstance(String sectionNumber) {
         ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
@@ -37,17 +43,14 @@ public class ChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.chart_layout,container,false);
         LineChart lineCharta = view.findViewById(R.id.lineCharta);
         LineChart lineChartb = view.findViewById(R.id.lineChartb);
-        names.add("温度");
-        names.add("压强");
-        names.add("其他");
-        //折线颜色
-        colour.add(Color.CYAN);
-        colour.add(Color.GREEN);
-        colour.add(Color.BLUE);
-
-        dynamicLineChartManager1 = new DynamicLineChartManager(lineCharta, names.get(0), colour.get(0));
-        dynamicLineChartManager2 = new DynamicLineChartManager(lineChartb, names, colour,10);
-
+        namesa.add("左脚掌");
+        coloura.add(Color.CYAN);
+        namesb.add("右脚掌");
+        colourb.add(Color.GREEN);
+        dynamicLineChartManager1 = new DynamicLineChartManager(lineCharta, namesa, coloura,10);
+        dynamicLineChartManager2 = new DynamicLineChartManager(lineChartb, namesb, colourb,10);
+        dynamicLineChartManager1.setDescription("");
+        dynamicLineChartManager2.setDescription("");
         dynamicLineChartManager1.setYAxis(100, 0, 10);
         dynamicLineChartManager2.setYAxis(100, 0, 10);
 
@@ -64,11 +67,13 @@ public class ChartFragment extends Fragment {
               getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            list.add((int) (Math.random() * 50) + 10);
-                            list.add((int) (Math.random() * 80) + 10);
-                            list.add((int) (Math.random() * 100));
-                            dynamicLineChartManager2.addEntry(list);
-                            list.clear();
+                            //TODO 添加运动模式判断，并根据判断修改随机数
+                            lista.add((int) (Math.random() * sprotsOff[0] + 10));
+                            listb.add((int) (Math.random() * sprotsOff[0] + 10));
+                            dynamicLineChartManager1.addEntry(lista);
+                            dynamicLineChartManager2.addEntry(listb);
+                            lista.clear();
+                            listb.clear();
                         }
                     });
                 }
@@ -76,10 +81,5 @@ public class ChartFragment extends Fragment {
         }).start();
 
         return view;
-
-
-    }
-    public void addEntry(View view) {
-        dynamicLineChartManager1.addEntry((int) (Math.random() * 100));
     }
 }

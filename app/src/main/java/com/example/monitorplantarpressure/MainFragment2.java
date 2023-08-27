@@ -26,12 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 public class MainFragment2 extends Fragment {
     public static final String SECTION_STRING = "main";
     private LineChart lineChart;
     private DynamicLineChartManager dynamicLineChartManager;
-    private List<Integer> list = new ArrayList<>(); //数据集合
+    public List<Integer> list = new ArrayList<>(); //数据集合
     private List<String> names = new ArrayList<>(); //折线名字集合
     private List<Integer> colour = new ArrayList<>();//折线颜色集合
     private int CollectTime = 1500;
@@ -43,9 +42,8 @@ public class MainFragment2 extends Fragment {
     private CharSequence[] charSequences = {"休闲模式", "运动模式"};
     private int item = 0;
     private LinearLayout ll_gotime;
-    private boolean isSprot = true;
-    public int sportTime ;
-
+    public boolean isSprot = true;
+    private int sportTime ;
     public static MainFragment2 newInstance(String sectionNumber) {
         MainFragment2 fragment = new MainFragment2();
         Bundle args = new Bundle();
@@ -139,16 +137,12 @@ public class MainFragment2 extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            if (sportTime>=3600){
                                 tv_countHour.setText(sportTime / 3600 + " 小时");
                                 tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
                                 tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
-//                            }
-//                            tv_countSec.setText(sportTime/);
                             list.add((int) (Math.random() * sportsMode[0]) + 10);
                             list.add((int) (Math.random() * sportsMode[1]) + 10);
                             list.add((list.get(0) + list.get(1)) / 2);
-//                            list.add((int) (Math.random() * 100));
                             dynamicLineChartManager.addEntry(list);
                             tv_onTimeValue.setText(list.get(2).toString());
                             list.clear();
@@ -238,5 +232,13 @@ public class MainFragment2 extends Fragment {
             return false;
         }
 
+    }
+
+    public List<Integer> getList() {
+        return list;
+    }
+
+    public void setList(List<Integer> list) {
+        this.list = list;
     }
 }

@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         mFragments = new ArrayList<Fragment>();
-        mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
+        mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
         mFragments.add(ChartFragment.newInstance(getResources().getString(R.string.index_bottom_bar_dynamic_state)));
-        mFragments.add(MainFragment.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
+        mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
         mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
         initIndexFragmentAdapter();
     }
