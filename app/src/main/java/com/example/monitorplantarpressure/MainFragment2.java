@@ -2,6 +2,7 @@ package com.example.monitorplantarpressure;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 public class MainFragment2 extends Fragment {
     public static final String SECTION_STRING = "main";
     private LineChart lineChart;
@@ -43,7 +46,8 @@ public class MainFragment2 extends Fragment {
     private int item = 0;
     private LinearLayout ll_gotime;
     public boolean isSprot = true;
-    private int sportTime ;
+    private int sportTime;
+    private SharedViewModel viewModel;
     public static MainFragment2 newInstance(String sectionNumber) {
         MainFragment2 fragment = new MainFragment2();
         Bundle args = new Bundle();
@@ -51,6 +55,7 @@ public class MainFragment2 extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -73,10 +78,12 @@ public class MainFragment2 extends Fragment {
         dynamicLineChartManager = new DynamicLineChartManager(lineChart, names, colour, 3);
         dynamicLineChartManager.setDescription("");
         dynamicLineChartManager.setYAxis(100, 0, 10);
-        sportTime = SPUtils.getInt("ST",1,getActivity());
+        sportTime = SPUtils.getInt("ST", 1, getActivity());
         tv_countHour.setText(sportTime / 3600 + " 小时");
         tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
         tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
+        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
         lineChart.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -127,19 +134,19 @@ public class MainFragment2 extends Fragment {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    SPUtils.getInt("ST",1,getActivity());
-                    if (isSprot){
-                        SPUtils.putInt("ST",sportTime,getActivity());
-                    }else if(isSprot == false){
+                    SPUtils.getInt("ST", 1, getActivity());
+                    if (isSprot) {
+                        SPUtils.putInt("ST", sportTime, getActivity());
+                    } else if (isSprot == false) {
                         sportTime++;
 
                     }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                                tv_countHour.setText(sportTime / 3600 + " 小时");
-                                tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
-                                tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
+                            tv_countHour.setText(sportTime / 3600 + " 小时");
+                            tv_countMin.setText(sportTime % 3600 / 60 + " 分钟");
+                            tv_countSec.setText(sportTime % 3600 % 60 + " 秒");
                             list.add((int) (Math.random() * sportsMode[0]) + 10);
                             list.add((int) (Math.random() * sportsMode[1]) + 10);
                             list.add((list.get(0) + list.get(1)) / 2);
@@ -209,6 +216,8 @@ public class MainFragment2 extends Fragment {
                                         }
                                     });
                                 }
+                                viewModel.setData(isSprot);
+
                                 dialog.dismiss();
                             }
                         })
@@ -224,6 +233,7 @@ public class MainFragment2 extends Fragment {
             }
         });
     }
+
     private static boolean isInteger(String value) {
         try {
             Integer.parseInt(value);
@@ -232,13 +242,5 @@ public class MainFragment2 extends Fragment {
             return false;
         }
 
-    }
-
-    public List<Integer> getList() {
-        return list;
-    }
-
-    public void setList(List<Integer> list) {
-        this.list = list;
     }
 }
