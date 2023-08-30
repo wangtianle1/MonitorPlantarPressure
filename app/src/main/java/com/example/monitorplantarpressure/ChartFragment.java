@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -48,7 +46,7 @@ public class ChartFragment extends Fragment  {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chart_layout,container,false);
+        View view = inflater.inflate(R.layout.chart_fragment,container,false);
         LineChart lineCharta = view.findViewById(R.id.lineCharta);
         LineChart lineChartb = view.findViewById(R.id.lineChartb);
         namesa.add("左脚掌");

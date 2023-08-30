@@ -1,6 +1,9 @@
 package com.example.monitorplantarpressure;
 
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
@@ -10,6 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.CaptureActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +50,37 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initEvent();
     }
+    public void startScanActivity(View view) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setPrompt("请扫描二维码");
+        integrator.setCameraId(0);
+        integrator.setOrientationLocked(true);
+        integrator.initiateScan();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                // 用户取消扫描
+            } else {
+                String scanResult = result.getContents();
+                // 使用扫描到的数据作为搜索查询
+
+                // 将扫描结果附加到百度搜索引擎的查询 URL
+                String searchUrl = "https://www.baidu.com/s?wd=" + Uri.encode(scanResult);
+
+                // 通过外部浏览器打开查询 URL
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(searchUrl));
+                startActivity(browserIntent);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
 
     private void initEvent() {
         index_bottom_bar_home.setOnClickListener(new TabOnClickListener(0));
@@ -63,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         mFragments = new ArrayList<Fragment>();
-        mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
+        mFragments.add(HomeFragment.newInstance(getResources().getString(R.string.index_bottom_bar_home)));
         mFragments.add(ChartFragment.newInstance(getResources().getString(R.string.index_bottom_bar_dynamic_state)));
-        mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
+        mFragments.add(AnalyseFragment.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
         mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
         initIndexFragmentAdapter();
     }
@@ -99,8 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         public void onClick(View v) {
             if (index == 4) {
+                startScanActivity(index_bottom_bar_scan);
                 // 跳转到Scan界面
-                Toast.makeText(MainActivity.this, "点击了扫描按钮", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "点击了扫描按钮", Toast.LENGTH_SHORT).show();
             } else {
                 //选择某一页
                 index_vp_fragment_list_top.setCurrentItem(index, false);

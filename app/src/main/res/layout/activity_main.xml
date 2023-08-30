@@ -12,8 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <com.example.monitorplantarpressure.MyViewPager
             android:id="@+id/index_vp_fragment_list_top"
             android:layout_width="match_parent"
@@ -125,7 +123,7 @@
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:layout_gravity="top|center"
-                        android:src="@drawable/play" />
+                        android:src="@drawable/analyse" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -170,24 +168,29 @@
             </LinearLayout>
 
         </FrameLayout>
+
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            app:cardElevation="0.1dp"
-            app:cardCornerRadius="35dp"
             android:layout_marginBottom="0dp"
-            android:orientation="vertical">
+            android:onClick="startScanActivity"
+
+            android:orientation="vertical"
+            app:cardCornerRadius="35dp"
+            >
+
             <ImageView
                 android:id="@+id/index_bottom_bar_scan"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
-                android:layout_gravity="center_horizontal"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
                 android:src="@mipmap/addition_fill" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
