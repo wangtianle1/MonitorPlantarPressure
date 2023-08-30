@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.journeyapps.barcodescanner.CaptureActivity;
+
+import java.sql.RowId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,6 +158,35 @@ public class MainActivity extends AppCompatActivity {
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         }
 
+        private void ImageChange(int drawble){
+            switch (drawble ){
+                case 0:
+                    index_bottom_bar_home_image.setImageResource(R.drawable.home_on);
+                    index_bottom_bar_dynamic_state_image.setImageResource(R.drawable.chart_off);
+                    index_bottom_bar_integral_image.setImageResource(R.drawable.find_on);
+                    index_bottom_bar_me_image.setImageResource(R.drawable.user_off);
+                    break;
+                    case 1:
+                    index_bottom_bar_home_image.setImageResource(R.drawable.home_off);
+                    index_bottom_bar_dynamic_state_image.setImageResource(R.drawable.chart_on);
+                    index_bottom_bar_integral_image.setImageResource(R.drawable.find_on);
+                    index_bottom_bar_me_image.setImageResource(R.drawable.user_off);
+                    break;
+                    case 2:
+                    index_bottom_bar_home_image.setImageResource(R.drawable.home_off);
+                    index_bottom_bar_dynamic_state_image.setImageResource(R.drawable.chart_off);
+                    index_bottom_bar_integral_image.setImageResource(R.drawable.find_off);
+                    index_bottom_bar_me_image.setImageResource(R.drawable.user_off);
+                    break;
+                    case 3:
+                    index_bottom_bar_home_image.setImageResource(R.drawable.home_off);
+                    index_bottom_bar_dynamic_state_image.setImageResource(R.drawable.chart_off);
+                    index_bottom_bar_integral_image.setImageResource(R.drawable.find_on);
+                    index_bottom_bar_me_image.setImageResource(R.drawable.user_on);
+                    break;
+            }
+        }
+
         //当新的页面被选中时调用
         public void onPageSelected(int position) {
             resetTextView();
@@ -174,6 +204,8 @@ public class MainActivity extends AppCompatActivity {
                     index_bottom_bar_me.setSelected(true);
                     break;
             }
+            ImageChange(position);
+
         }
     }
 

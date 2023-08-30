@@ -54,7 +54,7 @@
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_gravity="top|center"
-                        android:src="@drawable/home" />
+                        android:src="@drawable/home_on" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                         android:layout_height="25dp"
                         android:layout_gravity="top|center"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/pic" />
+                        android:src="@drawable/chart_off" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:layout_gravity="top|center"
-                        android:src="@drawable/analyse" />
+                        android:src="@drawable/find_on" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="top|center"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/user_off" />
 
                     <TextView
                         android:layout_width="wrap_content"
