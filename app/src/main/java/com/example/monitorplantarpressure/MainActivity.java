@@ -1,11 +1,11 @@
 package com.example.monitorplantarpressure;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,9 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
+import android.Manifest;
 public class MainActivity extends AppCompatActivity {
 
     private MyViewPager index_vp_fragment_list_top;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        askPermission();
         initView();
         initData();
         initEvent();
@@ -106,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(AnalyseFragment.newInstance(getResources().getString(R.string.index_bottom_bar_integral)));
         mFragments.add(MainFragment2.newInstance(getResources().getString(R.string.index_bottom_bar_me)));
         initIndexFragmentAdapter();
+    }
+    private void askPermission(){
+        boolean sSRPR= ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)|
+                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)|
+                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA);
+        Log.e("msg",Boolean.toString(sSRPR));
+        if(sSRPR){
+            //5.20更新，直接写下面这一行
+            //begin
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA
+            },0);
+            //end
+        }
+
     }
 
     private void initView() {

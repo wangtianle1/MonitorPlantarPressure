@@ -131,7 +131,7 @@ public class DynamicLineChartManager {
             lineDataSet.setHighLightColor(colors.get(i));
             lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-            lineDataSet.setValueTextSize(10f);
+            lineDataSet.setValueTextSize(8f);
             lineDataSets.add(lineDataSet);
 
         }
@@ -140,7 +140,11 @@ public class DynamicLineChartManager {
         lineChart.setData(lineData);
         lineChart.invalidate();
     }
-
+    public void setFullTextSize(Float size){
+        for (int i = 0 ; i<3;i++){
+            lineDataSets.get(i).setValueTextSize(size);
+        }
+    }
     /**
      * 动态添加数据（一条折线图）
      *
