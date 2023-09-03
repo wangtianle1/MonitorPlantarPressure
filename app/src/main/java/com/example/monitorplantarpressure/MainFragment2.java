@@ -1,4 +1,5 @@
 package com.example.monitorplantarpressure;
+import android.Manifest;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 public class MainFragment2 extends Fragment {
@@ -61,6 +64,7 @@ public class MainFragment2 extends Fragment {
     private ImageView iv_userIcon;
     private static final int REQUEST_CAMERA = 1;
     private static final int REQUEST_GALLERY = 2;
+    private SharedPreferences sharedPreferences;
     public static MainFragment2 newInstance(String sectionNumber) {
         MainFragment2 fragment = new MainFragment2();
         Bundle args = new Bundle();
@@ -187,7 +191,6 @@ public class MainFragment2 extends Fragment {
         }).start();
         return view;
     }
-
     private void initview(View view) {
         tv_name = view.findViewById(R.id.tv_name);
         cv_warming = view.findViewById(R.id.cv_warming);
@@ -207,7 +210,8 @@ public class MainFragment2 extends Fragment {
         cv_gotime = view.findViewById(R.id.cv_gotime);
         ll_gotime = view.findViewById(R.id.ll_gotime);
         iv_userIcon = view.findViewById(R.id.iv_userIcon);
-        tv_name.setText(SPUtils.getString("name","", getActivity()));
+        String uri = SPUtils.getString("avatar_image",null,getActivity());
+        tv_name.setText(SPUtils.getString("name","小王同学", getActivity()));
         tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,14 +300,15 @@ public class MainFragment2 extends Fragment {
                 return false;
             }
         });
+        sharedPreferences =getActivity(). getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         iv_userIcon.setOnClickListener(v ->openImagePickerDialog());
 
     }
 
     private void openImagePickerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Choose an option")
-                .setItems(new String[]{"Take Photo", "Choose from Gallery"}, (dialog, which) -> {
+        builder.setTitle("")
+                .setItems(new String[]{"拍照", "相册"}, (dialog, which) -> {
                     if (which == 0) {
                         // 打开相机
                         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
