@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebead6"
+    tools:context=".GifActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/iv_leftback"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/leftback"/>
+
+        <ImageView
+            android:id="@+id/iv_pgyl"
+            android:layout_width="360dp"
+            android:layout_height="240dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/pgyl" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_height="40dp"
+                android:background="#ebead6"
+                android:textColor="#594545"
+                android:textSize="15dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="足底压力"/>
+
+        <ImageView
+            android:id="@+id/iv_xjyl"
+            android:layout_width="360dp"
+            android:layout_height="240dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/xjyl" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#ebead6"
+            android:textColor="#594545"
+            android:textSize="15dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+
+            android:text="橡胶压力"/>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>
